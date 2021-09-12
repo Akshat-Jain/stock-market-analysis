@@ -231,7 +231,7 @@ strategy1_response_list = []
 
 for stock_name in nseTop1000MarketCap:
 # for stock_name in ["TEJASNET"]:
-    print(stock_name)
+    print(stock_name, flush=True)
     macd_diff, rsi = getDataForStock(stock_name)
     # print(macd_diff)
     # print(rsi)

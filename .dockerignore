@@ -1,0 +1,11 @@
+venv
+.idea
+__pycache__
+.DS_Store
+Dockerfile
+
+.git
+.gitignore
+.dockerignore
+LICENSE
+README.md
