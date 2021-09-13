@@ -3,6 +3,8 @@
 
 # -*- coding: utf-8 -*-
 
+#temp change
+
 from datetime import date, datetime, timedelta
 
 import nsepy.nselist
