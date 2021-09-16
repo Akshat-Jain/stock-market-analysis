@@ -18,6 +18,7 @@ from ticker_symbols import *
 from technical_indicators_chart_plotting import TechnicalIndicatorsChartPlotter
 from utils import *
 from strategies import *
+from send_mail import *
 
 stocksToBuy = []
 
@@ -257,7 +258,17 @@ for stock_name in nseTop1000MarketCap:
     # break
 
 strategy1_response_list.sort(key=lambda x: x["days_since_bearish_crossover"], reverse=True)
-print(strategy1_response_list)
+
+message = "<head><style>table,th,td {padding: 10px;border: 1px solid black;border-collapse: collapse;}</style></head><body><table><tr><th>Stock Name</th><th>Days since bearish crossover</th><th>RSI</th></tr>"
+
+for item in strategy1_response_list:
+    stock_name = item['stock_name']
+    dsbc = item['days_since_bearish_crossover']
+    rsi = round(item['rsi'],2)
+    message += f'<tr><td>{stock_name}</td><td align=center>{dsbc}</td><td>{rsi}</td></tr>'
+
+message+="</table>"
+send_mail('tanaymodani18@gmail.com','tanaymodani18@gmail.com',message)
 
 # print(stocksToBuy)
 # print(nsepy.live.getworkingdays(getLastDate() - timedelta(days=365), getLastDate()))
