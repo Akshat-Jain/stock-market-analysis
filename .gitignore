@@ -1,5 +1,4 @@
 venv
 .idea
 __pycache__
-.DS_Storesendgrid.env
-.env
+.DS_Store
