@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import time
 from datetime import timedelta
 
 import pandas as pd
@@ -109,7 +110,8 @@ def analyse_stocks():
 
 
 # Schedule everyday at 12:30 PM UTC, that is 6 PM IST
-schedule.every().day.at("12:30").do(analyse_stocks())
+schedule.every().day.at("12:30").do(analyse_stocks)
 
 while True:
     schedule.run_pending()
+    time.sleep(60)
