@@ -22,10 +22,10 @@ def get_data_for_stock(stock_name):
         historical_data_yfinance = yf.Ticker(stock_name + ".NS").history(
             start=date_util.getLastDate() - timedelta(days=365))
     except ValueError:  # includes simplejson.decoder.JSONDecodeError
-        print("Decoding JSON has failed")
+        print("Decoding JSON has failed", flush=True)
 
     if historical_data_yfinance.empty:
-        print("Incorrect symbol: ", stock_name)
+        print("Incorrect symbol: ", stock_name, flush=True)
         return None
 
     historical_data_yfinance['Date'] = historical_data_yfinance.index
@@ -74,7 +74,7 @@ def analyse_stocks():
             continue
 
         if len(macd_diff) < 2:
-            print("Macd_diff length is less than 2")
+            print("Macd_diff length is less than 2", flush=True)
             continue
 
         companies.append(company)
@@ -102,8 +102,8 @@ def analyse_stocks():
     strategy1_response_list.sort(key=lambda x: x["days_since_bearish_crossover"], reverse=True)
     strategy2_response_list.sort(key=lambda x: x["days_since_bearish_crossover"], reverse=True)
 
-    print(strategy1_response_list)
-    print(strategy2_response_list)
+    print(strategy1_response_list, flush=True)
+    print(strategy2_response_list, flush=True)
 
     mail_util.create_and_send_mail(strategy1_response_list, 'Strategy 1')
     mail_util.create_and_send_mail(strategy2_response_list, 'Strategy 2')
