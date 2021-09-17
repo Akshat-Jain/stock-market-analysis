@@ -51,7 +51,6 @@ docker run stock-market-analysis
     - For all the stocks in output, plot and save graphs (with MACD and RSI and volume) and attach them in the mail.
 5. Minor enhancements:
     - Add respective volume in the output as well.
-    - Code needs a serious refactoring.
 6. Deploy and enjoy.
 7. Maybe:
     - Push Docker image to Docker Hub.

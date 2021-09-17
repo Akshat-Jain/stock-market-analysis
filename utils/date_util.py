@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 
+
 # Get the last trading date.
 def getLastDate():
     if datetime.today().date().weekday() == 5:

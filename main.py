@@ -53,6 +53,10 @@ companies = []
 for stock_name in nseTop1000MarketCap:
     print(stock_name, flush=True)
     company = get_data_for_stock(stock_name)
+
+    if company is None:
+        continue
+
     macd_diff = company.macd_diff
     rsi = company.rsi
 
@@ -72,6 +76,7 @@ for stock_name in nseTop1000MarketCap:
 
 
 strategy1_response_list = []
+strategy2_response_list = []
 for company in companies:
     stock_name = company.symbol
     macd_diff = company.macd_diff
@@ -79,13 +84,23 @@ for company in companies:
 
     strategy_1 = Strategy1(company)
     strategy1_response = strategy_1.strategy1()
-    if strategy1_response is None:
-        continue
-    else:
+    if strategy1_response is not None:
         strategy1_response_list.append(strategy1_response)
+
+    if len(macd_diff) < 3:
+        continue
+
+    strategy_2 = Strategy2(company)
+    strategy2_response = strategy_2.strategy2()
+    if strategy2_response is not None:
+        strategy2_response_list.append(strategy2_response)
 
 
 strategy1_response_list.sort(key=lambda x: x["days_since_bearish_crossover"], reverse=True)
-print(strategy1_response_list)
-mail_util.create_and_send_mail(strategy1_response_list)
+strategy2_response_list.sort(key=lambda x: x["days_since_bearish_crossover"], reverse=True)
 
+print(strategy1_response_list)
+print(strategy2_response_list)
+
+mail_util.create_and_send_mail(strategy1_response_list, 'Strategy 1')
+mail_util.create_and_send_mail(strategy2_response_list, 'Strategy 2')
