@@ -40,6 +40,7 @@ docker run stock-market-analysis
 ## Key Features
 
 1. Strategy 1: Detect stocks with MACD bullish crossover on last trading day with good RSI value and report them to us.
+2. Basic mailing service to send the output to specified list of emails in tabular format.
 
 ## Todo:
 
@@ -47,8 +48,6 @@ docker run stock-market-analysis
 2. Strategy 2: Detect stocks with MACD bullish crossover on last to last trading day, and check if it showed strength last day. Report such stocks along with corresponding RSI value.
 3. Strategy 3: For huge / custom list of companies like RELIANCE, TCS, INFOSYS, etc, report their today's change. Maybe think about some better strategy for these later.
 4. Integrate mailing service to mail us the outputs of the program.
-    - Basic mailing service to send the output to a list of emails.
-    - Format the output as good looking table.
     - For all the stocks in output, plot and save graphs (with MACD and RSI and volume) and attach them in the mail.
 5. Minor enhancements:
     - Add respective volume in the output as well.
