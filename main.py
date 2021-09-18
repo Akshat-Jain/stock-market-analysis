@@ -5,7 +5,6 @@ from datetime import timedelta
 import pandas as pd
 import schedule
 import yfinance as yf
-from nsepy import get_history
 
 from strategies import *
 from technical_indicators_calculator import *
@@ -14,10 +13,6 @@ from utils import date_util, mail_util
 
 
 def get_data_for_stock(stock_name):
-    historical_data = get_history(symbol=stock_name,
-                                  start=date_util.getLastDate() - timedelta(days=365),
-                                  end=date_util.getLastDate())
-
     try:
         historical_data_yfinance = yf.Ticker(stock_name + ".NS").history(
             start=date_util.getLastDate() - timedelta(days=365))
@@ -109,8 +104,8 @@ def analyse_stocks():
     mail_util.create_and_send_mail(strategy2_response_list, 'Strategy 2')
 
 
-# Schedule everyday at 12:30 PM UTC, that is 6 PM IST
-schedule.every().day.at("12:30").do(analyse_stocks)
+# Schedule everyday at 2:30 PM UTC, that is 8:00 PM IST
+schedule.every().day.at("14:30").do(analyse_stocks)
 
 while True:
     schedule.run_pending()
